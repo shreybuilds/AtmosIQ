@@ -36,6 +36,8 @@ AtmosIQ shifts the paradigm from passive, raw data consumption to **proactive, c
 - [x] **Custom Dispatch Schedules:** Allow users to define their individual alert delivery times (e.g., `/settime 07:30`).
 - [x] **Optimized Dispatch Engine:** Groups active users by location and time, executing single API queries for batch alerts to prevent rate limiting and optimize latency.
 - [x] **Soft Subscription Management:** Allows users to opt-out with `/stop`, pausing alerts immediately while keeping preferences in database for easy reactivation.
+- [x] **Cloud-Ready Web Server:** Incorporates a background HTTP health-check server listening to `$PORT` variables to support deployment on PaaS hosts like Render.
+
 
 ### Planned & Upcoming Features
 - [ ] **Multi-Channel Delivery:** Add support for Discord Webhooks, WhatsApp, and Email.
@@ -167,8 +169,9 @@ AtmosIQ/
 ├── Procfile              # Heroku/Cloud deployment command setup
 ├── README.md             # Project documentation
 ├── requirements.txt      # Python package dependencies
-├── main.py               # Application entrypoint (orchestrates bot & scheduler threads)
+├── main.py               # Application entrypoint (orchestrates bot, scheduler, and health-check web server threads)
 ├── bot.py                # Telegram bot event handlers and command registrations
+
 ├── config.py             # Environment loader and global settings
 ├── database.py           # PostgreSQL client (handles CRUD operations and DB initialization)
 ├── engine.py             # Generative AI interface (interacts with LLM APIs)
