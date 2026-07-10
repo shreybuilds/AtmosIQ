@@ -15,8 +15,9 @@ def run_health_server():
         print(f"Health check server running on port {port}")
         httpd.serve_forever()
 
+
 def main():
-    # Start the health check web server in a background thread
+    # Start the health check web server in a background thread to prevent Render timeouts
     web_thread = threading.Thread(target=run_health_server)
     web_thread.daemon = True
     web_thread.start()
@@ -32,6 +33,7 @@ def main():
         bot.run()
     finally:
         bot.db.close()
+
 
 if __name__ == "__main__":
     main()

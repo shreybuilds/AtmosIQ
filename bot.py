@@ -11,8 +11,11 @@ class WeatherBot:
     def __init__(self):
         self.db = Database()
         self.gemini = GeminiSummary()
-        self.app = Application.builder().token(BOT_TOKEN).build()
+        self.app = Application.builder().token(BOT_TOKEN).post_init(self.post_init).build()
         self._register_handlers()
+
+    async def post_init(self, application):
+        self.loop = asyncio.get_running_loop()
 
     def _register_handlers(self):
         self.app.add_handler(CommandHandler("start", self.start))
@@ -91,8 +94,6 @@ class WeatherBot:
         await update.message.reply_text(summary, parse_mode="Markdown")
 
     def run(self):
-        import asyncio
-        self.loop = asyncio.get_event_loop()
         self.app.run_polling()
 
     def send_message(self, chat_id: int, message: str):
