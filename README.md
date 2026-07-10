@@ -116,7 +116,7 @@ Follow these steps to run AtmosIQ locally or on your servers:
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/AtmosIQ.git
+git clone https://github.com/shreybuilds/AtmosIQ.git
 cd AtmosIQ
 ```
 
@@ -231,5 +231,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
 ## 👤 Author
 
 **Shreyash Singh**
-* GitHub: [@shreybuilds]
-* Workspace: `shreybuilds/AtmosIQ`
+* GitHub: [@shreybuilds](https://github.com/shreybuilds)
+* Workspace: [shreybuilds/AtmosIQ](https://github.com/shreybuilds/AtmosIQ)
