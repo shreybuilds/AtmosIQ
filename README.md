@@ -223,7 +223,8 @@ Contributions make the open-source community an amazing place to learn, inspire,
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` file for more details.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
+
 
 ---
 
