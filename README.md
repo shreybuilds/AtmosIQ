@@ -231,5 +231,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
 ## 👤 Author
 
 **Shreyash Singh**
-* GitHub: [@ShreyashSingh](https://github.com/ShreyashSingh) *(update link if needed)*
+* GitHub: [@shreybuilds]
 * Workspace: `shreyHack3000/AtmosIQ`
