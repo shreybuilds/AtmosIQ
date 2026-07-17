@@ -116,7 +116,7 @@ Follow these steps to run AtmosIQ locally or on your servers:
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/shreybuilds/AtmosIQ.git
+git clone https://github.com/yourusername/AtmosIQ.git
 cd AtmosIQ
 ```
 
@@ -153,7 +153,7 @@ Open a chat with your Telegram Bot and use the following commands:
 * `/start` - Displays the greeting interface and instructions.
 * `/setlocation <city_name>` - Resolves city coordinates and registers your alert location.
   - *Example:* `/setlocation Tokyo`
-* `/settime HH:MM` - Schedules daily alert delivery (24-hour UTC format).
+* `/settime HH:MM` - Schedules daily alert delivery (24-hour IST format).
   - *Example:* `/settime 08:00`
 * `/weather` - Instantly returns the current LLM-summarized weather report for your saved location.
 * `/stop` - Temporarily unsubscribes from the daily alert system.
@@ -231,5 +231,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
 ## 👤 Author
 
 **Shreyash Singh**
-* GitHub: [@shreybuilds](https://github.com/shreybuilds)
-* Workspace: [shreybuilds/AtmosIQ](https://github.com/shreybuilds/AtmosIQ)
+* GitHub: [@ShreyashSingh](https://github.com/ShreyashSingh) *(update link if needed)*
+* Workspace: `shreyHack3000/AtmosIQ`

@@ -12,7 +12,8 @@ class WeatherScheduler:
 
     def send_daily_alerts(self):
         """Checks the current time and sends daily alerts to users matching their scheduled alert time."""
-        current_time_str = datetime.datetime.now().strftime("%H:%M")
+        ist = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+        current_time_str = datetime.datetime.now(ist).strftime("%H:%M")
 
 
         city_groups = self.db.get_users_grouped_by_city_and_time()

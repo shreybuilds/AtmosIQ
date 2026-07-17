@@ -69,7 +69,7 @@ class WeatherBot:
                 raise ValueError
 
             self.db.update_alert_time(chat_id, time_str)
-            await update.message.reply_text(f"⏰ Daily alert scheduled at {time_str} UTC.")
+            await update.message.reply_text(f"⏰ Daily alert scheduled at {time_str} IST.")
         except (IndexError, ValueError):
             await update.message.reply_text(
                 "❌ Invalid format. Use 24h format: `/settime HH:MM` (e.g., `/settime 08:30`)")

@@ -5,7 +5,9 @@ from config import DB_URL, ALERT_DEFAULT_TIME
 class Database:
     def __init__(self):
         self.conn = psycopg2.connect(DB_URL)
+        self.conn.autocommit = True  # Add this line to prevent transaction caching
         self._create_table()
+
 
     def _create_table(self):
         """Creates the users table and active_users view if they do not exist."""
