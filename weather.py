@@ -32,6 +32,9 @@ class WeatherService:
                 }
         except requests.RequestException as e:
             print(f"Geocoding Error: {e}")
+            if e.response is not None:
+                print(f"Status Code: {e.response.status_code}")
+                print(f"Response Body: {e.response.text}")
         return None
 
 
@@ -50,6 +53,9 @@ class WeatherService:
             return response.json()
         except requests.RequestException as e:
             print(f"Error fetching weather data: {e}")
+            if e.response is not None:
+                print(f"Status Code: {e.response.status_code}")
+                print(f"Response Body: {e.response.text}")
             return None
 
     def get_current_weather(self):
