@@ -51,6 +51,7 @@ class WeatherScheduler:
 
             for chat_id in chat_ids:
                 self.bot.send_message(chat_id, message_content)
+                self.db.log_alert(chat_id)
 
     def start(self):
         """Starts the scheduling loop to check every minute."""

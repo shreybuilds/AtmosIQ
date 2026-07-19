@@ -29,6 +29,21 @@ class Database:
                 FROM users
                 WHERE subscribed = TRUE;
             """)
+
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS user_states (
+                    chat_id BIGINT PRIMARY KEY,
+                    state VARCHAR(50) NOT NULL
+                );
+            """)
+
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS alert_logs (
+                    id SERIAL PRIMARY KEY,
+                    chat_id BIGINT NOT NULL,
+                    sent_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
             self.conn.commit()
 
     def add_user(self, chat_id: int, city: str , lat: float, lon: float):
@@ -133,6 +148,59 @@ class Database:
                     "subscribed": row[5]
                 }
             return None
+
+    def get_user_state(self, chat_id: int) -> str:
+        """Gets the onboarding state of the user, defaulting to SETUP_COMPLETE if not found."""
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT state FROM user_states WHERE chat_id = %s;", (chat_id,))
+            row = cur.fetchone()
+            return row[0] if row else "SETUP_COMPLETE"
+
+    def set_user_state(self, chat_id: int, state: str):
+        """Sets/updates the onboarding state of the user."""
+        with self.conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO user_states (chat_id, state)
+                VALUES (%s, %s)
+                ON CONFLICT (chat_id) DO UPDATE SET state = EXCLUDED.state;
+            """, (chat_id, state))
+            self.conn.commit()
+
+    def clear_user_state(self, chat_id: int):
+        """Clears the onboarding state for the user."""
+        with self.conn.cursor() as cur:
+            cur.execute("DELETE FROM user_states WHERE chat_id = %s;", (chat_id,))
+            self.conn.commit()
+
+    def log_alert(self, chat_id: int):
+        """Logs an alert sending event to database."""
+        with self.conn.cursor() as cur:
+            cur.execute("INSERT INTO alert_logs (chat_id) VALUES (%s);", (chat_id,))
+            self.conn.commit()
+
+    def get_alerts_sent_today(self) -> int:
+        """Gets total alerts sent today (in Asia/Kolkata timezone/IST)."""
+        with self.conn.cursor() as cur:
+            cur.execute("""
+                SELECT COUNT(*) FROM alert_logs 
+                WHERE sent_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Kolkata' >= CURRENT_DATE;
+            """)
+            row = cur.fetchone()
+            return row[0] if row else 0
+
+    def get_total_users_count(self) -> int:
+        """Gets total registered users count."""
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM users;")
+            row = cur.fetchone()
+            return row[0] if row else 0
+
+    def get_active_users_count(self) -> int:
+        """Gets total active (subscribed) users count."""
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM users WHERE subscribed = TRUE;")
+            row = cur.fetchone()
+            return row[0] if row else 0
 
     def close(self):
         """Gracefully closes the database connection."""
