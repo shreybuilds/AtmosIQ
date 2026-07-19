@@ -139,10 +139,6 @@ class WeatherBot:
         weather_service = WeatherService(user["latitude"], user["longitude"])
         weather_data = weather_service.get_weather_data_formatted()
         
-        # temporary check========================
-        
-        print("WEATHER_DATA:", weather_data)
-        print("ERROR:", weather_data.get("error"))
 
         if "error" in weather_data:
             await update.message.reply_text("❌ Failed to fetch current weather details. Try again later.")
