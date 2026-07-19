@@ -27,6 +27,11 @@ class WeatherBot:
         self.gemini = GeminiSummary()
         self.app = Application.builder().token(BOT_TOKEN).post_init(self.post_init).build()
         self._register_handlers()
+        
+        if ADMIN_CHAT_ID is None:
+            logger.warning("⚠️ ADMIN_CHAT_ID is not configured in .env. Admin commands are disabled.")
+        else:
+            logger.info(f"🔑 Admin commands configured for chat ID: {ADMIN_CHAT_ID}")
 
     async def post_init(self, application):
         self.loop = asyncio.get_running_loop()
