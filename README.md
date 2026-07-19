@@ -232,4 +232,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
 
 **Shreyash Singh**
 * GitHub: [@ShreyashSingh](https://github.com/ShreyashSingh) *(update link if needed)*
-* Workspace: `shreyHack3000/AtmosIQ`
+* Workspace: `shreybuilds/AtmosIQ`
